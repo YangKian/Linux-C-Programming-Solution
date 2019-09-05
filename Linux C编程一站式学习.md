@@ -1,0 +1,278 @@
+# Linux C编程一站式学习
+
+## Chapter 1.1
+
+### 习题 1.解释执行的语言相比编译执行的语言有什么优缺点？
+
+- 优点：
+  - 少了编译的过程，调试速度更快；
+  - 具有平台无关性。
+- 缺点：
+  - 缺少编译生成的中间文件，执行效率上不如编译执行的语言高。
+
+
+
+## Chapter 2.2
+
+### 习题1. 总结前面介绍的转义序列的规律，想想在printf的格式化字符串中怎么表示一个%字符？写个小程序实验一下。
+
+```c
+#include <stdio.h>
+int main(void) {
+    printf("this is a %%");
+    return 0;
+}
+```
+
+
+
+## Chapter 2.5
+
+### 习题1. 假设变量x和n是两个正整数，我们知道x/n这个表达式的结果是取Floor，例如x是17， n是4。如果希望结果去Ceiling应该怎么写表达式呢？例如x是17， n是4， 则结果是5，而x是16，n是4，则结果是4。
+
+```c
+#include <stdio.h>
+int ceiling(int a, int b) {
+    return a % b == 0 ? a / b : a / b + 1;
+}
+
+int main(void) {
+    int res = ceiling(17, 4);
+    printf("17/4 = %d\n", res);
+    res = ceiling(16, 4);
+    printf("16/4 = %d\n", res);
+   return 0;
+}
+```
+
+
+
+## Chapter 3.3
+
+### 习题1. 定义一个函数increment，它的作用是将传进来的参数加1，然后在main函数中用increment函数来增加变量的值，这个increment函数能奏效吗？为什么？
+
+>```c
+>void increment(int x)
+>{
+>	x = x + 1;
+>}
+>
+>int main(void)
+>{
+>	int i = 1, j = 2;
+>	increment(i); /* i now becomes 2 */
+>	increment(j); /* j now becomes 3 */
+>	return 0;
+>}
+>```
+
+A：不能奏效。传入的参数是int类型，即传入的是值的拷贝，不是传引用，increment函数没有返回值，故在increment函数执行完毕后，其内存被释放，increment函数内计算的结果作为increment函数的局部变量也会被销毁，无法传到main函数中。
+
+
+
+### 习题2.如果在一个程序中调用了printf函数却不包含头文件，例如`int main(void)  { printf("\n"); }`，编译时会报警告：`warning: incompatible implicit declaration of built-in function 'printf'`。请分析错误原因。
+
+A：根据警告提示的内容：隐式声明与内置的‘printf’函数不一致
+
+
+
+## Chapter 4.1
+
+### 习题1. 以下是程序段编译能通过，执行也不出错，但是执行结果不正确，请分析一下哪里错了。还有，既然错了为什么编译能通过呢？
+
+>int x = -1;
+>
+>if(x >0);
+>
+>​	printf("x is positive.\n")
+
+A：编译检查的是语法错误，而该段代码中语法完全正确，所以编译能通过。执行结果不正确是因为代码逻辑不正确，if语句后面直接跟了`;`号表明该语句已经结束，所以不管判断结果如何print语句一定会执行。代码逻辑不正确编译器是无法检查发现的。
+
+
+
+## Chapter 4.2
+
+### 习题1.写两个表达式，分别取分别取整型变量`x`的个位和十位。
+
+```c
+int unit = x % 10; //取个位
+int decade = x / 10 % 10; //取十位
+```
+
+
+
+### 习题2.写一个函数，参数是整形变量x，功能是打印x的个位和十位。
+
+```c
+#include <stdio.h>
+void printFunc (int x) {
+    printf("数字%d的个位数是：%d,十位数是：%d",  x,  x%10, x/10%10);
+}
+```
+
+
+
+## Chapter 4.3
+
+### 习题1.把代码段
+
+```
+if (x > 0 && x < 10);
+else
+	printf("x is out of range.\n");
+```
+
+### 改写成下面这种形式：
+
+```
+if (____ || ____)
+	printf("x is out of range.\n");
+```
+
+### ____应该怎么填？
+
+A：$x\le0$，$x\ge10$；
+
+
+
+### 习题2.把代码段：
+
+```
+if (x > 0)
+	printf("Test OK!\n");
+else if (x <= 0 && y > 0)
+	printf("Test OK!\n");
+else
+	printf("Test failed!\n");
+```
+
+### 改写成下面这种形式：
+
+```
+if (____ && ____)
+	printf("Test failed!\n");
+else
+	printf("Test OK!\n");
+```
+
+### ____应该怎么填？
+
+A：$x\le0$，$y\le0$
+
+
+
+### 习题3.有这样一段代码：
+
+```
+if (x > 1 && y != 1) {
+	...
+} else if (x < 1 && y != 1) {
+	...
+} else {
+	...
+}
+```
+
+### 要进入最后一个`else`，x和y需要满足条件____ || ____。这里应该怎么填？
+
+A：$x == 1$, $y == 1$
+
+
+
+### 习题4.以下哪一个if判断条件是多余的可以去掉？这里所谓的“多余”是指，某种情况下如果本来应该打印`Test OK!`，去掉这个多余条件后仍然打印`Test OK!`，如果本来应该打印`Test failed!`，去掉这个多余条件后仍然打印`Test failed!`。
+
+```c
+if (x<3 && y>3)
+	printf("Test OK!\n");
+else if (x>=3 && y>=3)
+	printf("Test OK!\n");
+else if (z>3 && x>=3)
+	printf("Test OK!\n");
+else if (z<=3 && y>=3)
+	printf("Test OK!\n");
+else
+	printf("Test failed!\n");
+```
+
+A：去掉的条件是：`else if (z<=3 && y>=3)`
+
+
+
+## Chapter 5.1
+
+### 习题1. 编写一个布尔函数`int is_leap_year(int year)`，判断参数 year 是不是闰年。如果某年份能被4整除，但不能被100整除，那么这一年就是闰年，此外，能被400整除的年份也是闰年。
+
+```c
+#include <stdio.h>
+void is_leap_year (int year) {
+    if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+		printf("%d年是闰年", year);
+    } else {
+		printf("%d年不是闰年", year);
+    }
+}
+```
+
+
+
+### 习题2.编写一个函数`double myround(double x)`，输入一个小数，将它四舍五入。例如`myround(-3.51)`的值是-4.0，`myround(4.49)`的值是4.0。可以调用`math.h`中的库函数`ceil`和`floor`实现这个函数。
+
+```c
+#include <stdio.h>
+#include <math.h>
+double myround (double x) {
+    if(x>=0) {
+	if((int)x * 10 % 10 >= 5) {
+	    return ceil(x);
+	} else {
+	    return floor(x);
+	} 
+    } else {
+	if(((int)(-x * 10)) % 10 >= 5) {
+	    printf("-3.51来到了floor函数中\n");
+	    return floor(x);
+	} else {
+	    return ceil(x);
+    }
+  } 
+}
+```
+
+
+
+## Chapter 5.3
+
+### 习题1：编写递归函数求两个正整数`a`和`b`的最大公约数（GCD，Greatest Common Divisor），使用Euclid算法：
+
+1. 如果`a`除以`b`能整除，则最大公约数是`b`。
+2. 否则，最大公约数等于`b`和`a%b`的最大公约数。
+
+### Euclid算法是很容易证明的，请读者自己证明一下为什么这么算就能算出最大公约数。最后，修改你的程序使之适用于所有整数，而不仅仅是正整数。
+
+```c
+#include <stdio.h>
+int GCD(int a, int b) {
+    if(a % b == 0) {
+		return b;
+    } else {
+		return GCD(b, a % b);
+    }
+}
+```
+
+
+
+### 习题2：编写递归函数求Fibonacci数列的第`n`项，这个数列是这样定义的：
+
+fib(0)=1
+fib(1)=1
+fib(n)=fib(n-1)+fib(n-2)
+
+```c
+#include <stdio.h>
+int fib(int n) {
+    if(n < 2) return 1;
+    return fib(n - 1) + fib(n - 2);
+}
+```
+
