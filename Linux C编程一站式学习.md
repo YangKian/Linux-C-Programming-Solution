@@ -276,3 +276,73 @@ int fib(int n) {
 }
 ```
 
+
+
+## Chapter 6.1
+
+### 习题1：用循环解决[第 3 节 “递归”](https://akaedu.github.io/book/ch05s03.html#func2.recursion)的所有习题，体会递归和循环这两种不同的思路。
+
+```c
+#include <stdio.h>
+int fib(int n) {
+    int a = 1, b = 1;
+    if(n < 2) return 1;
+    for(int i = 2; i <= n; ++i) {
+		int temp = a;
+		a += b;
+		b = temp;
+    }
+    return a + b;
+}
+```
+
+```c
+int GCD(int a, int b){
+    while(a % b != 0) {
+		int temp = a;
+		a = b;
+		b = temp % b;
+    }
+    return b;
+}
+```
+
+
+
+### 习题2：
+
+```c
+#include <stdio.h>
+int count(){
+    int sum = 0;
+    for(int i = 1; i <= 100; ++i) {
+		int a = i;
+       while(a != 0) {
+	   		if(a % 10 == 9) {
+	       		++sum;
+	   }
+	   a /= 10;
+       }
+    }
+    return sum;
+}
+```
+
+
+
+## llChapter 6.4
+
+### 习题1：求素数这个程序只是为了说明`break`和`continue`的用法才这么写的，其实完全可以不用`break`和`continue`，请读者修改一下控制流程，去掉`break`和`continue`而保持功能不变。
+
+```c
+#include <stdio.h>
+int is_prime(int n){
+    for(int i = 2; i < n; ++i){
+		if(n % i == 0){
+	    	return 0;
+		}
+    }
+    return 1;
+}
+```
+
