@@ -72,7 +72,7 @@ A：不能奏效。传入的参数是int类型，即传入的是值的拷贝，�
 
 ### 习题2.如果在一个程序中调用了printf函数却不包含头文件，例如`int main(void)  { printf("\n"); }`，编译时会报警告：`warning: incompatible implicit declaration of built-in function 'printf'`。请分析错误原因。
 
-A：根据警告提示的内容：隐式声明与内置的‘printf’函数不一致
+A：根据警告提示的内容：隐式声明与内置的`printf`函数不一致。查询`printf`的函数可知，函数签名为：`int printf( const char* format , [argument] ... );`，而隐式声明的格式为：`int func(arg)`，即两个签名的参数个数不相同，所以报错。
 
 
 
@@ -253,9 +253,9 @@ double myround (double x) {
 #include <stdio.h>
 int GCD(int a, int b) {
     if(a % b == 0) {
-		return b;
+	return b;
     } else {
-		return GCD(b, a % b);
+	return GCD(b, a % b);
     }
 }
 ```
@@ -288,9 +288,9 @@ int fib(int n) {
     int a = 1, b = 1;
     if(n < 2) return 1;
     for(int i = 2; i <= n; ++i) {
-		int temp = a;
-		a += b;
-		b = temp;
+	int temp = a;
+	a += b;
+	b = temp;
     }
     return a + b;
 }
@@ -299,9 +299,9 @@ int fib(int n) {
 ```c
 int GCD(int a, int b){
     while(a % b != 0) {
-		int temp = a;
-		a = b;
-		b = temp % b;
+	int temp = a;
+	a = b;
+	b = temp % b;
     }
     return b;
 }
@@ -316,10 +316,10 @@ int GCD(int a, int b){
 int count(){
     int sum = 0;
     for(int i = 1; i <= 100; ++i) {
-		int a = i;
+	int a = i;
        while(a != 0) {
-	   		if(a % 10 == 9) {
-	       		++sum;
+	   if(a % 10 == 9) {
+	       ++sum;
 	   }
 	   a /= 10;
        }
@@ -338,9 +338,9 @@ int count(){
 #include <stdio.h>
 int is_prime(int n){
     for(int i = 2; i < n; ++i){
-		if(n % i == 0){
-	    	return 0;
-		}
+	if(n % i == 0){
+	    return 0;
+	}
     }
     return 1;
 }
@@ -368,10 +368,10 @@ int is_prime(int n){
 #include <stdio.h>
 void printFunc(int n) {
     for(int i = 1; i <= n; ++i) {
-		for(int j = 1; j <= i; ++j) {
-	    	printf("%d\t", i*j);
-		}
-		printf("\n");
+	for(int j = 1; j <= i; ++j) {
+	    printf("%d\t", i*j);
+	}
+	printf("\n");
     }
 }
 ```
@@ -402,27 +402,27 @@ void printFunc(int n) {
 #include <stdio.h>
 void printFunc(int n, char b) {
     if(n % 2 == 0) {
-		printf("不能使用偶数做参数"); 
-		return;
+	printf("不能使用偶数做参数"); 
+	return;
     }
 
     int count = -1;  // count用来记录每行打印字符的个数
     for(int i = 1; i <= n; i ++) {
-		if(i <= (n >> 1) + 1){
-	   		 count += 2;
-		} else {
-	    	count -= 2;
+	if(i <= (n >> 1) + 1){
+	   count += 2;
+	} else {
+	   count -= 2;
 	}
 	
-		int print_start = (n - count) >> 1;  // print_start用来记录开始打印的位置
-		for(int j = 1; j <= n; ++j) {
-	    	if(j <= print_start || j > (n - print_start)) {
-				printf("\t");
-	    	} else {
-				printf("%c\t", b);
-	   	 }
-		}
-		printf("\n");
+	int print_start = (n - count) >> 1;  // print_start用来记录开始打印的位置
+	for(int j = 1; j <= n; ++j) {
+	    if(j <= print_start || j > (n - print_start)) {
+		printf("\t");
+	    } else {
+		printf("%c\t", b);
+	     }
+	}
+	printf("\n");
     }
 }
 ```
@@ -436,17 +436,17 @@ void printFunc(int n, char b) {
 ```c
 void printFunc(struct complex_struct z) {
     if(real_part(z) == 0 && img_part(z) == 0) {
-		printf("0\n");
+	printf("0\n");
     } else if(real_part(z) == 0) {
-		printf("%fi\n", img_part(z));
+	printf("%fi\n", img_part(z));
     } else if(img_part(z) == 0) {
-		printf("%f\n", real_part(z));
+	printf("%f\n", real_part(z));
     } else {
-		if(img_part(z) > 0) {
-	    	printf("%f + %fi\n", real_part(z), img_part(z));
-		} else {
-	    	printf("%f - %fi\n", real_part(z), -img_part(z));
-		}
+	if(img_part(z) > 0) {
+	    printf("%f + %fi\n", real_part(z), img_part(z));
+	} else {
+	    printf("%f - %fi\n", real_part(z), -img_part(z));
+	}
     }
 }
 ```
@@ -508,22 +508,22 @@ struct Rational div_Rational(struct Rational a, struct Rational b) {
 
 void print_Rational(struct Rational z){
     if(z.member == 0) {
-		printf("0\n");
-		return;
+	printf("0\n");
+	return;
     }
     int gcd = maxvalue(z.member, z.denominator);
     if(z.denominator / gcd == 1) {
-		printf("%d\n", z.member / gcd);
+	printf("%d\n", z.member / gcd);
     } else {
-		printf("%d/%d\n", z.member / gcd, z.denominator / gcd);
+	printf("%d/%d\n", z.member / gcd, z.denominator / gcd);
     }
 }
 
 int maxvalue(int a, int b) {
     if(a % b == 0) {
-		return b;
+	return b;
     } else {
-		return maxvalue(b, a % b);
+	return maxvalue(b, a % b);
     }
 }
 ```
@@ -540,39 +540,39 @@ int maxvalue(int a, int b) {
 double real_part(struct complex_struct z)
 {
     if(z.t == RECTANGULAR) {
-		return z.a;
+	return z.a;
     } else {
-		return z.a * cos(z.b);
+	return z.a * cos(z.b);
     }
 }
 
 double img_part(struct complex_struct z)
 {
     if(z.t == RECTANGULAR) {
-		return z.b;
+	return z.b;
     } else {
-		return z.a * sin(z.b);
+	return z.a * sin(z.b);
     }
 }
 
 double magnitude(struct complex_struct z) {
     if(z.t == RECTANGULAR) {
-		return sqrt(z.a * z.a + z.b * z.b);
+	return sqrt(z.a * z.a + z.b * z.b);
     } else {
-		return z.a;
+	return z.a;
     }
 }
 
 double angle(struct complex_struct z) {
     if(z.t == RECTANGULAR) {
-		double ang = acos(-1.0);
-		if(z.a > 0) {
-	   		 return atan(z.b / z.a);
-		} else {
-	    	return atan(z.b / z.a) + ang;
-		}
+	double ang = acos(-1.0);
+	if(z.a > 0) {
+	    return atan(z.b / z.a);
+	} else {
+	    return atan(z.b / z.a) + ang;
+	}
     } else {
-		return z.b;
+	return z.b;
     }
 }
 ```
@@ -588,9 +588,9 @@ enum coordinate_type { RECTANGULAR = 1, POLAR };
 
 int main(void)
 {
-	int RECTANGULAR;
-	printf("%d %d\n", RECTANGULAR, POLAR);
-	return 0;
+    int RECTANGULAR;
+    printf("%d %d\n", RECTANGULAR, POLAR);
+    return 0;
 }
 ```
 
