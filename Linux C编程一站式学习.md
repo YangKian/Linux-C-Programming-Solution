@@ -229,7 +229,6 @@ double myround (double x) {
 	} 
     } else {
 	if(((int)(-x * 10)) % 10 >= 5) {
-	    printf("-3.51来到了floor函数中\n");
 	    return floor(x);
 	} else {
 	    return ceil(x);
@@ -280,7 +279,7 @@ int fib(int n) {
 
 ## Chapter 6.1
 
-### 习题1：用循环解决[第 3 节 “递归”](https://akaedu.github.io/book/ch05s03.html#func2.recursion)的所有习题，体会递归和循环这两种不同的思路。
+### 习题1：用循环解决第 3 节“递归”的所有习题，体会递归和循环这两种不同的思路。
 
 ```c
 #include <stdio.h>
@@ -597,3 +596,72 @@ int main(void)
 ### 结果是什么？并解释一下为什么是这样的结果。
 
 A：结果是：0 2，原因是：定义了一个局部变量RECTANGULAR，但是没有给它赋值，导致访问到了未知的内存空间内存储的值。同时，该值还覆盖了全局枚举变量RECTANGULAR中的正确值。
+
+
+
+## Chapter 8.1
+
+### 习题1：编写一个程序，定义两个类型和长度都相同的数组，将其中一个数组的所有元素拷贝给另一个。既然数组不能直接赋值，想想应该怎么实现。
+
+```c
+#include <stdio.h>
+#define N 10
+
+void myCopy(int a[], int b[]) {
+    for(int i = 0; i < N; ++i) {
+		b[i] = a[i];
+    }
+}
+```
+
+
+
+## Chapter 8.2
+
+### 习题1：用`rand`函数生成[10, 20]之间的随机整数，表达式应该怎么写？
+
+A：`int x = rand() % 11 + 10;`
+
+
+
+## Chapter 8.3
+
+### 习题1：补完本节直方图程序的`main`函数，以可视化的形式打印直方图。
+
+```c
+int main(void) {
+    int i, histogram[10] = {0}, count = N;
+
+    gen_random(10);
+    for(i = 0; i < N; i++) {
+		histogram[a[i]]++;
+    }
+
+    for(int i = 0; i < 10; ++i) {
+		printf("%d\t", i);
+    }
+    
+    printf("\n");
+
+    while(count > 0) {
+		for(int i = 0; i < 10; ++i) {
+	   		 if(histogram[i] != 0) {
+				printf("*\t");
+				--histogram[i];
+				--count;
+				if(count <= 0) {
+		   			 return 0;
+				}
+	    	} else {
+				printf(" \t");
+	  	  }
+		}
+		printf("\n");
+    }
+    printf("\n");
+     return 0;
+}
+```
+
+
+
