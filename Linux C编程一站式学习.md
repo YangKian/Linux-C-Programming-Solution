@@ -252,9 +252,9 @@ double myround (double x) {
 #include <stdio.h>
 int GCD(int a, int b) {
     if(a % b == 0) {
-	return b;
+		return b;
     } else {
-	return GCD(b, a % b);
+		return GCD(b, a % b);
     }
 }
 ```
@@ -287,9 +287,9 @@ int fib(int n) {
     int a = 1, b = 1;
     if(n < 2) return 1;
     for(int i = 2; i <= n; ++i) {
-	int temp = a;
-	a += b;
-	b = temp;
+		int temp = a;
+		a += b;
+		b = temp;
     }
     return a + b;
 }
@@ -298,9 +298,9 @@ int fib(int n) {
 ```c
 int GCD(int a, int b){
     while(a % b != 0) {
-	int temp = a;
-	a = b;
-	b = temp % b;
+		int temp = a;
+		a = b;
+		b = temp % b;
     }
     return b;
 }
@@ -315,14 +315,14 @@ int GCD(int a, int b){
 int count(){
     int sum = 0;
     for(int i = 1; i <= 100; ++i) {
-	int a = i;
-       while(a != 0) {
-	   if(a % 10 == 9) {
-	       ++sum;
-	   }
-	   a /= 10;
-       }
-    }
+		int a = i;
+       		while(a != 0) {
+	   			if(a % 10 == 9) {
+	       		++sum;
+	   			}
+	   			a /= 10;
+       		}
+    	}
     return sum;
 }
 ```
@@ -337,9 +337,9 @@ int count(){
 #include <stdio.h>
 int is_prime(int n){
     for(int i = 2; i < n; ++i){
-	if(n % i == 0){
-	    return 0;
-	}
+		if(n % i == 0){
+	    	return 0;
+		}
     }
     return 1;
 }
@@ -367,10 +367,10 @@ int is_prime(int n){
 #include <stdio.h>
 void printFunc(int n) {
     for(int i = 1; i <= n; ++i) {
-	for(int j = 1; j <= i; ++j) {
-	    printf("%d\t", i*j);
-	}
-	printf("\n");
+		for(int j = 1; j <= i; ++j) {
+	    	printf("%d\t", i*j);
+		}
+		printf("\n");
     }
 }
 ```
@@ -401,26 +401,26 @@ void printFunc(int n) {
 #include <stdio.h>
 void printFunc(int n, char b) {
     if(n % 2 == 0) {
-	printf("不能使用偶数做参数"); 
-	return;
+		printf("不能使用偶数做参数"); 
+		return;
     }
 
     int count = -1;  // count用来记录每行打印字符的个数
     for(int i = 1; i <= n; i ++) {
-	if(i <= (n >> 1) + 1){
-	   count += 2;
-	} else {
-	   count -= 2;
-	}
+		if(i <= (n >> 1) + 1){
+	   		count += 2;
+		} else {
+	   		count -= 2;
+		}
 	
 	int print_start = (n - count) >> 1;  // print_start用来记录开始打印的位置
 	for(int j = 1; j <= n; ++j) {
 	    if(j <= print_start || j > (n - print_start)) {
-		printf("\t");
-	    } else {
-		printf("%c\t", b);
-	     }
-	}
+			printf("\t");
+	   		 } else {
+			printf("%c\t", b);
+	    	 }
+		}
 	printf("\n");
     }
 }
@@ -435,14 +435,14 @@ void printFunc(int n, char b) {
 ```c
 void printFunc(struct complex_struct z) {
     if(real_part(z) == 0 && img_part(z) == 0) {
-	printf("0\n");
+		printf("0\n");
     } else if(real_part(z) == 0) {
-	printf("%fi\n", img_part(z));
+		printf("%fi\n", img_part(z));
     } else if(img_part(z) == 0) {
-	printf("%f\n", real_part(z));
+		printf("%f\n", real_part(z));
     } else {
-	if(img_part(z) > 0) {
-	    printf("%f + %fi\n", real_part(z), img_part(z));
+		if(img_part(z) > 0) {
+	    	printf("%f + %fi\n", real_part(z), img_part(z));
 	} else {
 	    printf("%f - %fi\n", real_part(z), -img_part(z));
 	}
@@ -507,22 +507,22 @@ struct Rational div_Rational(struct Rational a, struct Rational b) {
 
 void print_Rational(struct Rational z){
     if(z.member == 0) {
-	printf("0\n");
+		printf("0\n");
 	return;
     }
     int gcd = maxvalue(z.member, z.denominator);
     if(z.denominator / gcd == 1) {
-	printf("%d\n", z.member / gcd);
+		printf("%d\n", z.member / gcd);
     } else {
-	printf("%d/%d\n", z.member / gcd, z.denominator / gcd);
+		printf("%d/%d\n", z.member / gcd, z.denominator / gcd);
     }
 }
 
 int maxvalue(int a, int b) {
     if(a % b == 0) {
-	return b;
+		return b;
     } else {
-	return maxvalue(b, a % b);
+		return maxvalue(b, a % b);
     }
 }
 ```
@@ -539,26 +539,26 @@ int maxvalue(int a, int b) {
 double real_part(struct complex_struct z)
 {
     if(z.t == RECTANGULAR) {
-	return z.a;
+		return z.a;
     } else {
-	return z.a * cos(z.b);
+		return z.a * cos(z.b);
     }
 }
 
 double img_part(struct complex_struct z)
 {
     if(z.t == RECTANGULAR) {
-	return z.b;
+		return z.b;
     } else {
-	return z.a * sin(z.b);
+		return z.a * sin(z.b);
     }
 }
 
 double magnitude(struct complex_struct z) {
     if(z.t == RECTANGULAR) {
-	return sqrt(z.a * z.a + z.b * z.b);
+		return sqrt(z.a * z.a + z.b * z.b);
     } else {
-	return z.a;
+		return z.a;
     }
 }
 
@@ -664,4 +664,272 @@ int main(void) {
 ```
 
 
+
+### 习题2：定义一个数组，编程打印它的全排列。比如定义：
+
+```
+#define N 3
+int a[N] = { 1, 2, 3 };
+```
+
+### 则运行结果是：
+
+```
+$ ./a.out
+1 2 3 
+1 3 2 
+2 1 3 
+2 3 1 
+3 2 1 
+3 1 2 
+1 2 3
+```
+
+### 程序的主要思路是：
+
+1. 把第1个数换到最前面来（本来就在最前面），准备打印1xx，再对后两个数2和3做全排列。
+2. 把第2个数换到最前面来，准备打印2xx，再对后两个数1和3做全排列。
+3. 把第3个数换到最前面来，准备打印3xx，再对后两个数1和2做全排列。
+
+### 可见这是一个递归的过程，把对整个序列做全排列的问题归结为对它的子序列做全排列的问题，注意我没有描述Base Case怎么处理，你需要自己想。你的程序要具有通用性，如果改变了`N`和数组`a`的定义（比如改成4个数的数组），其它代码不需要修改就可以做4个数的全排列（共24种排列）。
+
+### 完成了上述要求之后再考虑第二个问题：如果再定义一个常量`M`表示从`N`个数中取几个数做排列（`N == M`时表示全排列），原来的程序应该怎么改？
+
+### 最后再考虑第三个问题：如果要求从`N`个数中取`M`个数做组合而不是做排列，就不能用原来的递归过程了，想想组合的递归过程应该怎么描述，编程实现它。
+
+
+
+## Chapter 10.2
+
+### 习题1：看下面的程序：
+
+```
+#include <stdio.h>
+
+int main(void)
+{
+	int i;
+	char str[6] = "hello";
+	char reverse_str[6] = "";
+
+	printf("%s\n", str);
+	for (i = 0; i < 5; i++)
+		reverse_str[5-i] = str[i];
+	printf("%s\n", reverse_str);
+	return 0;
+}
+```
+
+### 首先用字符串`"hello"`初始化一个字符数组`str`（算上`'\0'`共6个字符）。然后用空字符串`""`初始化一个同样长的字符数组`reverse_str`，相当于所有元素用`'\0'`初始化。然后打印`str`，把`str`倒序存入`reverse_str`，再打印`reverse_str`。然而结果并不正确：
+
+```
+$ ./main 
+hello
+```
+
+### 我们本来希望`reverse_str`打印出来是`olleh`，结果什么都没有。重点怀疑对象肯定是循环，那么简单验算一下，`i=0`时，`reverse_str[5]=str[0]`，也就是`'h'`，`i=1`时，`reverse_str[4]=str[1]`，也就是`'e'`，依此类推，i=0,1,2,3,4，共5次循环，正好把h,e,l,l,o五个字母给倒过来了，哪里不对了？用`gdb`跟踪循环，找出错误原因并改正。
+
+A：该程序会将`\0`置换到开头；修正：`reverse_str[4 - i] = str[i]`
+
+
+
+## Chapter 11.4
+
+### 习题1：快速排序是另外一种采用分而治之策略的排序算法，在平均情况下的时间复杂度也是Θ(nlgn)，但比归并排序有更小的时间常数。它的基本思想是这样的：
+
+```
+int partition(int start, int end)
+{
+	从a[start..end]中选取一个pivot元素（比如选a[start]为pivot）;
+	在一个循环中移动a[start..end]的数据，将a[start..end]分成两半，
+	使a[start..mid-1]比pivot元素小，a[mid+1..end]比pivot元素大，而a[mid]就是pivot元素;
+	return mid;
+}
+
+void quicksort(int start, int end)
+{
+	int mid;
+	if (end > start) {
+		mid = partition(start, end);
+		quicksort(start, mid-1);
+		quicksort(mid+1, end);
+	}
+}
+```
+
+### 请补完`partition`函数，这个函数有多种写法，请选择时间常数尽可能小的实现方法。想想快速排序在最好和最坏情况下的时间复杂度是多少？
+
+```c
+void swap(int i, int j) {
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+int partition(int start, int end) {
+    int pivot = arr[end];
+    int i = start, j;
+    for(j = start; j < end; ++j) {
+		if(arr[j] < pivot) {
+	    	swap(i, j);
+	   		 ++i;
+		}
+    }
+    swap(i, end);
+    return i;
+}
+```
+
+时间复杂度：
+
+- 最好情况：每次选择分割点都恰好能将数组分为均等的两部分，此时时间复杂度为：$O(nlogn)$；
+- 最坏情况：数组自身已经有序，即每次划分得到的两部分都极其不均等，此时时间复杂度为：$O(n^2)$；
+
+
+
+## Chapter 11.5
+
+### 习题1：实现一个算法，在一组随机排列的数中找出最小的一个。你能想到的最直观的算法一定是Θ(n)的，想想有没有比Θ(n)更快的算法？
+
+A：没有比O(n)更快的算法了，因为数组无序，要找到最小值，在没有遍历完整个数组的情况下，是没办法确定没有遍历到的元素中是否还存在比当前最小值还小的元素的。
+
+### 习题2：在一组随机排列的数中找出第二小的，这个问题比上一个稍复杂，你能不能想出Θ(n)的算法？
+
+A：能，先对数组进行一次快排，将数组分成三个部分：[start, pivot - 1]，[pivot]，[pivot + 1, end]，然后比较目标值与pivot的大小，若小于pivot，则仅需在前一半中查找，同理若大于，则在后一半中查找，时间复杂度为，每次递归查找的数量都是上一次的一半，即：$n + \frac{n}{2} + \frac{n}{4}  + ... 1 = 2n - 1$ ，即时间复杂度为$O(n)$
+
+
+
+### 习题3：进一步泛化，在一组随机排列的数中找出第k小的，这个元素称为k-th Order Statistic。能想到的最直观的算法肯定是先把这些数排序然后取第k个，时间复杂度和排序算法相同，可以是Θ(nlgn)。这个问题虽然比前两个问题复杂，但它也有平均情况下时间复杂度是Θ(n)的算法，将上一节习题1的快速排序算法稍加修改就可以解决这个问题：
+
+```
+/* 从start到end之间找出第k小的元素 */
+int order_statistic(int start, int end, int k)
+{
+	用partition函数把序列分成两半，中间的pivot元素是序列中的第i个;
+	if (k == i)
+		返回找到的元素;
+	else if (k > i)
+		从后半部分找出第k-i小的元素并返回;
+	else
+		从前半部分找出第k小的元素并返回;
+}
+```
+
+### 请编程实现这个算法。
+
+```c
+void swap(int i, int j) {
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+int partition(int start, int end) {
+    int pivot = arr[end];
+    int i = start, j;
+    for(j = start; j < end; ++j) {
+		if(arr[j] < pivot) {
+	    	swap(i, j);
+	    	++i;
+		}
+    }
+    swap(i, end);
+    return i;
+}
+
+int order_statistic(int start, int end, int k) {
+    int i;
+    if(end >= start) {
+		i = partition(start, end);
+		if(k == i) {
+	    	printf("%d\n", i);
+	    	return arr[i];
+		} else if(k > i) {
+	    	return order_statistic(i + 1, end, k);
+		} else {
+	    	return order_statistic(start, i - 1, k);
+		}
+    }
+}
+```
+
+
+
+## Chapter 11.6
+
+### 习题1：本节的折半查找算法有一个特点：如果待查找的元素在数组中有多个则返回其中任意一个，以本节定义的数组`int a[8] = { 1, 2, 2, 2, 5, 6, 8, 9 };`为例，如果调用`binarysearch(2)`则返回3，即`a[3]`，而有些场合下要求这样的查找返回`a[1]`，也就是说，如果待查找的元素在数组中有多个则返回第一个。请修改折半查找算法实现这一特性。
+
+```c
+int binarysearch(int target, int low, int high) {
+    while(low <= high){
+		int mid = low + (high - low >> 1);
+		if(arr[mid] < target) {
+	    	low = mid + 1;
+		} else if (arr[mid] > target) {
+	    	high = mid - 1;
+		} else {
+	    	while(arr[mid - 1] == target) {
+			--mid;
+	    	}
+	    	return mid;
+		}
+    }
+    return -1;
+}
+```
+
+
+
+### 习题2：编写一个函数`double mysqrt(double y);`求`y`的正平方根，参数`y`是正实数。我们用折半查找来找这个平方根，在从0到`y`之间必定有一个取值是`y`的平方根，如果我们查找的数`x`比`y`的平方根小，则x2<y，如果我们查找的数`x`比`y`的平方根大，则x2>y，我们可以据此缩小查找范围，当我们查找的数足够准确时（比如满足|x2-y|<0.001），就可以认为找到了`y`的平方根。思考一下这个算法需要迭代多少次？迭代次数的多少由什么因素决定？
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+double mysqrt(double y) {
+    double low = 0, high = y;
+    while(low < high) {
+		double mid = low + (high - low) / 2;
+		double square_mid = mid * mid;
+        if (fabs(square_mid - y) < 0.001) {
+	    	return mid;
+		} else if(square_mid > y) {
+	    	high = mid - 0.001; //注意精度，不要错写成mid - 1
+		} else if (square_mid < y) {
+	    	low = mid + 0.001;
+		}
+    }
+    return -1.0;
+}
+```
+
+迭代次数为：log(y)次，迭代次数的多少是由精度来决定的。
+
+
+
+### 习题3：编写一个函数`double mypow(double x, int n);`求`x`的`n`次方，参数`n`是正整数。最简单的算法是：
+
+```
+double product = 1;
+for (i = 0; i < n; i++)
+	product *= x;
+```
+
+### 这个算法的时间复杂度是Θ(n)。其实有更好的办法，比如`mypow(x, 8)`，第一次循环算出x·x=x2，第二次循环算出x2·x2=x4，第三次循环算出4·x4=x8。这样只需要三次循环，时间复杂度是Θ(lgn)。思考一下如果`n`不是2的整数次幂应该怎么处理。请分别用递归和循环实现这个算法。
+
+```c
+#include <stdio.h>
+#include <math.h>
+double mypow(double x, int n) {
+    double result = 1;
+    while(n != 0) {
+		if((n & 1) == 1) {
+	    	result *= x;
+		}
+		x *= x;
+		n >>= 1;
+    }
+    return result;
+}
+```
 
