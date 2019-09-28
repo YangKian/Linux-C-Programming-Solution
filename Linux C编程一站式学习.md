@@ -933,3 +933,74 @@ double mypow(double x, int n) {
 }
 ```
 
+
+
+## Chapter 14.2
+
+### 习题1：二进制小数可以这样定义：
+
+### (0.A1A2A3...)2=A1×2-1+A2×2-2+A3×2-3+...
+
+### 这个定义同时也是从二进制小数到十进制小数的换算公式。从本节讲的十进制转二进制的推导过程出发类比一下，十进制小数换算成二进制小数应该怎么算？
+
+A：将十进制的小数部分乘2取整，直到小数部分变成0为止，然后将得到的结果按顺序排列；
+
+
+
+### 习题2：再类比一下，八进制（或十六进制）与十进制之间如何相互换算？
+
+A：将底数分别换成8或16
+
+
+
+## Chapter 16.1
+
+### 习题1.1.1：下面两行`printf`打印的结果有何不同？请读者比较分析一下。
+
+```
+int i = 0xcffffff3;
+printf("%x\n", 0xcffffff3>>2);
+printf("%x\n", i>>2);
+```
+
+A：
+
+- 第一个的结果为：0x33fffffc，因为此时原数 0xcffffff3是被当成无符号数来处理的；
+- 第二个的结果为：0xf3fffffc，因为此时i是int类型，是有符号数，原数 0xcffffff3展开成二进制的值的最高8位是：11001111，最高为是1，即为负数，右移时在高位补的值为1，即前8位变为:11110011，转为16进制就是f3，所以结果为：0xf3fffffc
+
+
+
+### 习题1.3.1：统计一个无符号整数的二进制表示中1的个数，函数原型是`int countbit(unsigned int x);`。
+
+```c
+//方法一
+int countbit(unsigned int x) {
+    uint mask = 1;
+    int count = 0;
+    while(mask != 0) {
+        if((mask & x) != 0) {
+            ++count;
+        }
+        mask <<= 1;
+    }
+    return count;
+}
+//方法二
+int countbit(unsigned int x) {
+    int count = 0;
+    while(x != 0) {
+        ++count;
+        x &= (x - 1);
+    }
+    return count;
+}
+```
+
+
+
+### 习题1.3.2：用位操作实现无符号整数的乘法运算，函数原型是`unsigned int multiply(unsigned int x, unsigned int y);`。例如：(11011)2×(10010)2=((11011)2<<1)+((11011)2<<4)。
+
+
+
+### 习题1.3.3：对一个32位无符号整数做循环右移，函数原型是`unsigned int rotate_right(unsigned int x);`。所谓循环右移就是把低位移出去的部分再补到高位上去，例如`rotate_right(0xdeadbeef, 16)`的值应该是0xefdeadbe。
+
